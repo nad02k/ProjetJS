@@ -1,0 +1,189 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  color: #333;
+}
+
+h1 {
+  font-size: 2.8em;
+  margin-bottom: 25px;
+  background: linear-gradient(to right, #ff6ec4, #7873f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+.note-form {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+  transition: transform 0.3s ease;
+}
+
+.note-form:hover {
+  transform: translateY(-5px);
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-top: 15px;
+  color: #555;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  margin-top: 8px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  outline: none;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #ff6ec4;
+  box-shadow: 0 0 5px rgba(255, 110, 196, 0.4);
+}
+
+button#add-note,
+button#export-notes {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff6ec4, #7873f5);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+
+button#add-note:hover,
+button#export-notes:hover {
+  box-shadow: 0 5px 15px rgba(255, 110, 196, 0.4);
+  transform: scale(1.02);
+}
+
+input[type="file"] {
+  margin-top: 15px;
+}
+
+#notes {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.note {
+  padding: 20px;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease forwards;
+  border-left: 10px solid #7873f5;
+  transition: transform 0.3s ease;
+}
+
+.note:hover {
+  transform: translateY(-5px);
+}
+
+.note h4 {
+  margin-bottom: 10px;
+  font-size: 1.3em;
+  color: #333;
+}
+
+.note p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  color: #555;
+}
+
+.note.work { border-left-color: #2196F3; }
+.note.personal { border-left-color: #FFC107; }
+.note.urgent { border-left-color: #F44336; }
+.note.study { border-left-color: #4dd0e1; }
+.note.asso { border-left-color: #8e24aa; }
+
+.progress-bar-container {
+  height: 10px;
+  background: #f1f1f1;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #ff6ec4, #7873f5);
+  width: 100%;
+  transition: width 1s linear;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease forwards;
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .note-form {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>📝 FlashNote - Notes Éphémères</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>📝 FlashNote</h1>
+
+  <div class="note-form">
+    <input type="text" id="note-title" placeholder="Titre de la note" required />
+    <textarea id="note-content" placeholder="Contenu..."></textarea>
+
+    <label for="category">Catégorie :</label>
+    <select id="category">
+      <option value="work">Travail</option>
+      <option value="personal">Personnel</option>
+      <option value="urgent">Urgent</option>
+      <option value="study">Étude</option>
+      <option value="asso">Vie Associative</option>
+    </select>
+
+    <label for="duration">Durée :</label>
+    <select id="duration">
+      <option value="60000">1 minute</option>
+      <option value="90000">1m30s</option>
+      <option value="120000">2 minutes</option>
+      <option value="300000">5 minutes</option>
+      <option value="custom">⏱ Temps personnalisé</option>
+    </select>
+
+    <div id="customTimeField" style="display: none;">
+      <label for="customTime">Temps (en secondes) :</label>
+      <input type="number" id="customTime" placeholder="Ex: 45" min="1" />
+    </div>
+
+    <button id="add-note">➕ Ajouter Note</button>
+    <button id="export-notes">📤 Exporter Notes</button>
+    <input type="file" id="import-file" accept=".json" />
+  </div>
+
+  <div id="notes"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
