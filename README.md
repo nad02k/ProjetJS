@@ -1,19 +1,18 @@
-# FlashNote - Notes Éphémères 📝
+# FlashNote - Notes Éphémères 
 
-Application web permettant de créer des **notes éphémères** avec une durée limitée.
+Application web permettant de créer des notes éphémères avec une durée limitée.
 
-## 🔥 Fonctionnalités
+## Fonctionnalités
 
 - Création de notes avec titre, contenu, catégorie et durée
 - Sauvegarde locale avec `localStorage`
 - Rafraîchissement dynamique toutes les secondes
 - Catégories : Travail, Personnel, Urgent, Étude, Vie Associative
 - Durée personnalisable (jusqu’à la seconde)
-- Notifications du navigateur
 - Export & Import JSON
 - Design moderne et responsive
 
-## 📁 Structure
+## Structure
 - `index.html` : Interface utilisateur
 - `style.css` : Design coloré et responsive
 - `script.js` : Logique côté client

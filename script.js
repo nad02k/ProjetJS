@@ -8,10 +8,12 @@ const customTimeInput = document.getElementById('customTime');
 const notesDiv = document.getElementById('notes');
 const exportBtn = document.getElementById('export-notes');
 const importInput = document.getElementById('import-file');
+//JavaScript utilise les millisecondes comme unité de temps par défaut
 
-let notes = JSON.parse(localStorage.getItem("notes")) || [];
+let notes = JSON.parse(localStorage.getItem("notes")) || []; //Charge les notes sauvegardées dans le localStorage ou crée un tableau vide.
 
-// Afficher ou cacher le champ de temps perso
+
+// Afficher ou cacher le champ de temps perso (qd on clicke sur temps personnalise la barra a choisir saffiche)
 durationSelect.addEventListener('change', () => {
   if (durationSelect.value === 'custom') {
     customTimeField.style.display = 'block';
@@ -20,11 +22,11 @@ durationSelect.addEventListener('change', () => {
   }
 });
 
-function saveNotes() {
+function saveNotes() { //Sauvegarde toutes les notes actuelles dans le localstorage
   localStorage.setItem("notes", JSON.stringify(notes));
 }
 
-function getDurationInMillis() {
+function getDurationInMillis() { //Si l’utilisateur choisit un temps personnalisé, convertit les secondes en millisecondes.Vérifie que l’entrée est un nombre valide.
   const selected = durationSelect.value;
   if (selected !== 'custom') return parseInt(selected);
 
@@ -36,7 +38,13 @@ function getDurationInMillis() {
   return seconds * 1000;
 }
 
-function renderNotes() {
+function renderNotes() {/*Efface #notes et reconstruit l'affichage des notes :
+
+Titre, contenu
+
+Barre de progression (proportion du temps restant)
+
+Classe CSS correspondant à la catégorie*/
   notesDiv.innerHTML = "";
   notes.forEach((note, index) => {
     const noteEl = document.createElement("div");
@@ -69,33 +77,16 @@ function renderNotes() {
 
 function updateNotes() {
   const now = Date.now();
-  notes = notes.map(note => {
-    note.remaining = Math.max(0, note.timestamp + note.duration - now);
+  notes = notes.map(note => { //.map() parcourt chaque note de la liste notes
+    note.remaining = Math.max(0, note.timestamp + note.duration - now);//Math.max(0, ...) garantit que remaining n'est jamais négatif. Si la note a expiré, on met remaining = 0.
     return note;
-  }).filter(note => note.remaining > 0);
+  }).filter(note => note.remaining > 0); //.filter() garde uniquement les notes non expirées (remaining > 0
 
   saveNotes();
   renderNotes();
 }
 
 setInterval(updateNotes, 1000);
-
-// Notification API
-function requestNotificationPermission() {
-  if (!("Notification" in window)) {
-    console.log("Notifications non supportées.");
-  } else if (Notification.permission !== "granted") {
-    Notification.requestPermission();
-  }
-}
-
-requestNotificationPermission();
-
-function showNotification(title, body) {
-  if (Notification.permission === "granted") {
-    new Notification(title, { body });
-  }
-}
 
 addBtn.addEventListener("click", () => {
   const title = titleInput.value.trim();
@@ -115,14 +106,12 @@ addBtn.addEventListener("click", () => {
   contentInput.value = "";
   if (customTimeField.style.display === 'block') customTimeInput.value = "";
 
-  setTimeout(() => {
-    showNotification("Note expirée", `"${title}" a expiré.`);
-  }, duration);
+  
 });
 
 // Exporter
 exportBtn.addEventListener('click', () => {
-  const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });// crée un Blob, c’est-à-dire une représentation binaire d’un fichier.
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
